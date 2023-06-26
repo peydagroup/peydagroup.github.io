@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .footer {
+       position: fixed;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: beige;
+       color: white;
+       text-align: center;
+       padding: 20px;
+    }
+    </style>    
+</head>
+<body>
+
+<h1>Peyda Bridge Test</h1>
+
+<p>
+    <button type="button" onclick="showLoading()">Show loading for 3s</button>
+</p>
+
+<p>
+    <button type="button" onclick="appExit()">Exit</button>
+</p>
+
+<p>
+Message:
+<input type="text" id="message" />
+<button type="button" onclick="applyMessage()">Show</button>
+</p>
+
+<p>
+    Confirm question:
+    <input type="text" id="confirm" />    
+    <button type="button" onclick="confirm()">Show Confirm</button>
+</p>
+
+<p>
+    <button type="button" onclick="showError()">Show Error!</button>
+</p>
+
+<p>
+    <button type="button" onclick="openURL()">Open URL!</button>
+</p>
+
+<p>
+    <button type="button" onclick="getLocation()">Get Location!</button><div id="mylocation"></div>
+</p>
+
+<p>
+    <button type="button" onclick="goToService()">Go To Service!</button>
+</p>
+
+<script>
+var x = document.getElementById("mylocation");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showErrorMap);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+function showErrorMap(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+</script> 
+
+
+
+<div class="footer">
+    <a href="?p=1">Next Page!</a>
+</div>
+
+
+
+
+<script src="https://m.peyda.group/peyda-connector.js"></script>
+<link href=" https://m.peyda.group/peyda-connector.css" rel="stylesheet" type="text/css" media="all"  />
+
+
+<script>
+    
+    peyda.setPageTitle('test');
+    
+    peyda.beInformedWebAppIsReady('web');
+    
+    peyda.callMeOnBackButtonPress(()=>{
+        alert('Back operation!');
+        
+    })    
+
+    function applyMessage() {
+        console.log(`applyMessage`, document.getElementById("message").value);
+        peyda.showMessageBox('My Test Title',document.getElementById("message").value)
+    }
+
+    let timer;
+
+    function showLoading() {
+        console.log(`showLoading`);
+        peyda.showLoading();
+        timer = setInterval(function () {
+            peyda.hideLoading();
+            clearInterval(timer);
+        }, 3000)
+    }
+    
+    function appExit() {
+        console.log('appExit in microservice!');
+        peyda.appExit();
+    }    
+    
+    function confirm() {
+        peyda.showConfirmBox("Confirm Title", document.getElementById("confirm").value, "ok", "cancel", ()=>{ 
+            alert('OK operation!');
+        }, ()=>{ 
+            alert('CANCEL operation!');
+        });
+    }
+    
+    function showError(){
+        peyda.showErrorBox("Error Title","Error Message!");
+    }
+    
+    function openURL(){
+        peyda.openExternalUrl('https://github.com/ali00h');
+    }
+    
+    function goToService(){
+        peyda.goToService('2506322','/#/around');
+    }
+
+</script>
+</body>
+</html>
