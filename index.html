@@ -53,6 +53,10 @@ Message:
 </p>
 
 <p>
+    Service Key:
+    <input type="text" id="service_key" value="2506322" />   
+    Service URL:
+    <input type="text" id="service_url" value="/#/around"/>     
     <button type="button" onclick="goToService()">Go To Service!</button>
 </p>
 
@@ -151,7 +155,7 @@ function showErrorMap(error) {
     }
     
     function goToService(){
-        peyda.goToService('2506322','/#/around');
+        peyda.goToService(document.getElementById("service_key").value,document.getElementById("service_url").value);
     }
 
 </script>
