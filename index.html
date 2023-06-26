@@ -2,102 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-    .footer {
-       position: fixed;
-       left: 0;
-       bottom: 0;
-       width: 100%;
-       background-color: beige;
-       color: white;
-       text-align: center;
-       padding: 20px;
-    }
-    </style>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bridge Test</title>
+    <link rel="stylesheet" href="bulma/css/bulma.min.css">
+ 
 </head>
 <body>
 
-<h1>Peyda Bridge Test</h1>
 
-<p>
-    <button type="button" onclick="showLoading()">Show loading for 3s</button>
-</p>
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+        Peyda Bridge Test
+        </h1>
+        <p class="subtitle">
+        Simple page for evaluating <strong>Peyda Bridge</strong>!
+        </p>
 
-<p>
-    <button type="button" onclick="appExit()">Exit</button>
-</p>
 
-<p>
-Message:
-<input type="text" id="message" />
-<button type="button" onclick="applyMessage()">Show</button>
-</p>
 
-<p>
-    Confirm question:
-    <input type="text" id="confirm" />    
-    <button type="button" onclick="confirm()">Show Confirm</button>
-</p>
+        <article class="panel is-info">
+            <p class="panel-heading">
+              Actions
+            </p>
+            <div class="panel-block">
+                <div class="buttons">
+                    <button type="button" onclick="appExit()" class="button is-info">Exit</button>
 
-<p>
-    <button type="button" onclick="showError()">Show Error!</button>
-</p>
+                    <button type="button" onclick="showLoading()" class="button is-link">Show loading for 3s</button>                    
 
-<p>
-    <button type="button" onclick="openURL()">Open URL!</button>
-</p>
+                    <button type="button" onclick="showError()" class="button is-danger">Show Error!</button>
 
-<p>
-    <button type="button" onclick="getLocation()">Get Location!</button><div id="mylocation"></div>
-</p>
+                    <button type="button" onclick="openURL()" class="button is-success">Open URL!</button>
 
-<p>
-    Service Key:
-    <input type="text" id="service_key" value="2506322" />   
-    Service URL:
-    <input type="text" id="service_url" value="/#/around"/>     
-    <button type="button" onclick="goToService()">Go To Service!</button>
-</p>
+                    <button type="button" onclick="getLocation()" class="button is-warning">Get Location!</button><div id="mylocation"></div>
+                </div>
+            </div>
+        </article>        
+
+        <article class="panel is-info">
+            <p class="panel-heading">
+              Show Message
+            </p>
+            <div class="panel-block">
+                <div class="content">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" id="message" placeholder="Message Content">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button type="button" onclick="applyMessage()" class="button is-info">Show</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>        
+
+
+        <article class="panel is-warning">
+            <p class="panel-heading">
+              Show Confirm
+            </p>
+            <div class="panel-block">
+                <div class="content">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" id="confirm" placeholder="Confirm question">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button type="button" onclick="confirm()" class="button is-warning is-light">Show Confirm!</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>     
+
+
+
+        <article class="panel is-success">
+            <p class="panel-heading">
+              Go To Service
+            </p>
+            <div class="panel-block">
+                <div class="content">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" id="service_key" placeholder="Service Key" value="2506322">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" id="service_url" placeholder="Service URL" value="/#/around">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button type="button" onclick="goToService()" class="button is-success">Go To Service!</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+    </div>
+</section>
+
+
 
 <script>
-var x = document.getElementById("mylocation");
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showErrorMap);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-
-function showErrorMap(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred."
-      break;
-  }
-}
 </script> 
 
 
-
-<div class="footer">
-    <a href="?p=1">Next Page!</a>
-</div>
 
 
 
@@ -151,13 +172,43 @@ function showErrorMap(error) {
     }
     
     function openURL(){
-        peyda.openExternalUrl('https://github.com/ali00h');
+        peyda.openExternalUrl('https://raw.githubusercontent.com/peydagroup/peydagroup.github.io/main/index.html');
     }
     
     function goToService(){
         peyda.goToService(document.getElementById("service_key").value,document.getElementById("service_url").value);
     }
 
+    var x = document.getElementById("mylocation");
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showErrorMap);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+    }
+
+    function showErrorMap(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+        x.innerHTML = "User denied the request for Geolocation."
+        break;
+        case error.POSITION_UNAVAILABLE:
+        x.innerHTML = "Location information is unavailable."
+        break;
+        case error.TIMEOUT:
+        x.innerHTML = "The request to get user location timed out."
+        break;
+        case error.UNKNOWN_ERROR:
+        x.innerHTML = "An unknown error occurred."
+        break;
+    }
+    }
 </script>
 </body>
 </html>
