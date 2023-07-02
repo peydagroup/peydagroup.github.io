@@ -181,6 +181,7 @@
         peyda.startPayment(paymentRequest, (resp)=>{ 
             console.log('payment response in microservice:');
             console.log(resp);
+            peyda.showMessageBox('نتیجه پرداخت',resp.message);
         });
     }
     
